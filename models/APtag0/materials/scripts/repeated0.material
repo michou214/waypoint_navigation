@@ -1,0 +1,13 @@
+material APmat/tag0
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture tag0.png
+      }
+    }
+  }
+}	

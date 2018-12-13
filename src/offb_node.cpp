@@ -76,13 +76,6 @@ ros::Subscriber est_local_pos_sub = nh.subscribe<geometry_msgs::PoseStamped>
 //ros::Subscriber true_local_pos_sub = nh.subscribe<gazebo_msgs::ModelStates>
 //("gazebo/model_states", 10, true_local_pos_cb);
 
-// The node subscribe to Topic "/tag_detections_pose", 10 msgs in buffer before deleting
-//ros::Subscriber APtag_est_pos_sub = nh.subscribe<geometry_msgs::PoseArray>
-//("tag_detections_pose", 10, APtag_est_pos_cb);
-// The node subscribe to Topic "/tag_detections_pose", 10 msgs in buffer before deleting
-ros::Subscriber APtag_est_pos_sub = nh.subscribe<apriltags_ros::AprilTagDetectionArray>
-("tag_detections", 10, APtag_est_pos_cb);
-
     // The node publish the commanded local position        
     ros::Publisher local_pos_pub = nh.advertise<geometry_msgs::PoseStamped>
             ("mavros/setpoint_position/local", 10);
@@ -109,7 +102,7 @@ ros::Subscriber APtag_est_pos_sub = nh.subscribe<apriltags_ros::AprilTagDetectio
     Vector3f goal_pos(5.0f, 5.0f, 5.0f); 
     Vector3f takeoff (0.0f, 0.0f, HEIGHT);
     Vector3f landing1(0.0f, 0.0f, HEIGHT);
-    Vector3f landing2(0.0f, 0.0f, -0.15f);
+    Vector3f landing2(0.0f, 0.0f, -0.1f);
     Vector3f landing[2] = {landing1, landing2};
     int size_land = sizeof(landing)/sizeof(landing[0]);
 
@@ -196,10 +189,7 @@ ros::Subscriber APtag_est_pos_sub = nh.subscribe<apriltags_ros::AprilTagDetectio
                     //ROS_INFO("COND 2");
                     goal_pos = landing[idx];
                 }
-                else
-                    goal_pos = waypoints[idx];
-                    //Vector3f v = goal_pos;
-                    //ROS_INFO("GOAL2=[%f, %f, %f], idx=%d", v(0), v(1), v(2), idx);
+                else ;
             }
             else
                 goal_pos = takeoff;

@@ -92,13 +92,6 @@ ros::Subscriber est_local_pos_sub = nh.subscribe<geometry_msgs::PoseStamped>
 //ros::Subscriber true_local_pos_sub = nh.subscribe<gazebo_msgs::ModelStates>
 //("gazebo/model_states", 10, true_local_pos_cb);
 
-// The node subscribe to Topic "/tag_detections_pose", 10 msgs in buffer before deleting
-//ros::Subscriber APtag_est_pos_sub = nh.subscribe<geometry_msgs::PoseArray>
-//("tag_detections_pose", 10, APtag_est_pos_cb);
-// The node subscribe to Topic "/tag_detections_pose", 10 msgs in buffer before deleting
-ros::Subscriber APtag_est_pos_sub = nh.subscribe<apriltags_ros::AprilTagDetectionArray>
-("tag_detections", 10, APtag_est_pos_cb);
-
     // The node publish the commanded local position        
     ros::Publisher local_pos_pub = nh.advertise<geometry_msgs::PoseStamped>
             ("mavros/setpoint_position/local", 10);

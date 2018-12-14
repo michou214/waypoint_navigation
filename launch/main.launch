@@ -1,4 +1,7 @@
 <?xml version="1.0"?>
+
+<!-- MODE 1 -->
+
 <launch>
     <!-- MAVROS posix SITL environment launch script -->
     <!-- launches MAVROS, PX4 SITL, Gazebo environment, and spawns vehicle -->

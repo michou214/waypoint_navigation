@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<launch>
+
+<arg name="state_topic" 	default="mavros/state" /> 
+<!-- <arg name="pc_url"   default="udp://@mac-wlan" /> -->
+<arg name="setpoint_topic" 	default="mavros/setpoint_position/local" />
+
+<node pkg="waypoint_navigation" name="offboard_node" type="offboard_node.py" output="screen"> 
+	<param name="state_topic" 		value="$(arg state_topic)"/> 
+	<param name="setpoint_topic" 	value="$(arg setpoint_topic)"/> 
+</node>
+
+
+</launch>

@@ -29,7 +29,7 @@ using namespace Eigen;
 #include <vector>
 #include <cmath>
 
-#include "offb_node.h"
+#include "offb_node_M1.h"
 
 
 #define HEIGHT 1.75f

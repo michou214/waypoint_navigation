@@ -1,4 +1,7 @@
 <?xml version="1.0"?>
+
+
+
 <launch>
     <!-- Posix SITL environment launch script -->
     <!-- launches PX4 SITL, Gazebo environment, and spawns vehicle -->

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!-- MODE 1 -->
+<launch>
+
+<!-- From main.launch - MAVROS configs -->
+<!-- <arg name="fcu_url" default="udp://:14540@localhost:14557"/> -->
+<!-- <arg name="respawn_mavros" default="false"/> -->
+
+<arg name="fcu_url" 	  default="/dev/ttyUSB0:57600" /> 
+<!-- <arg name="pc_url"   default="udp://@mac-wlan" /> -->
+<arg name="pc_url" 		  default="udp://@pc" />
+<arg name="tgt_system" 	  default="1" /> 
+<arg name="tgt_component" default="0" /> 
+<arg name="log_output" 	  default="screen" /> 
+
+
+<include file="$(find mavros)/launch/node.launch">
+	<arg name="pluginlists_yaml" 	value="$(find mavros)/launch/px4_pluginlists.yaml" /> 
+	<arg name="config_yaml" 		value="$(find mavros)/launch/px4_config.yaml" /> 
+
+	<arg name="fcu_url" 	value="$(arg fcu_url)" /> 
+	<arg name="pc_url" 		value="$(arg pc_url)" /> 
+	<arg name="tgt_system"  value="$(arg tgt_system)" /> 
+	<arg name="tgt_component" value="$(tgt_component)" /> 
+	<arg name="log_output"  value="$(arg log_output)" /> 
+</include>
+
+<arg name="server" default="windows" /> 
+
+<include file="$(find vrpn_client_ros)/launch/sample.launch"> 
+	<arg name="server" value="$(arg server)" /> 
+</include>
+
+
+<arg name="vrpn_topic" 		default="/vrpn_client_node/drone/pose" /> 
+<arg name="mavros_topic" 	default="/mavros/vision_pose/pose" /> 
+
+<!-- <include file="$(find swarm)/launch/frame_node.launch">  -->
+<include file="$(find waypoint_navigation)/launch/frame_node.launch"> 
+	<arg name="vrpn_topic" 		value="$(arg vrpn_topic)" /> 
+	<arg name="mavros_topic" 	value="$(arg mavros_topic)" /> 
+</include>
+
+
+<!-- Apriltag-ROS -->
+<include file="$(find waypoint_navigation)/launch/APtag_ros.launch">
+</include>
+
+
+</launch>

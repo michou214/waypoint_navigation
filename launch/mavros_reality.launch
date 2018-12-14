@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+
+<launch>
+<!-- ====================   -->
+<!-- Arguments defintions   -->
+<!-- ====================   -->
+
+<arg name="fcu_url" 	  default="/dev/ttyUSB0:57600" /> 
+<!-- <arg name="pc_url"   default="udp://@mac-wlan" /> -->
+<arg name="gcs_url" 		  default="udp://@gcs" />
+<arg name="tgt_system" 	  default="1" /> 
+<arg name="tgt_component" default="0" /> 
+<arg name="log_output" 	  default="screen" /> 
+
+
+<!-- For VRPN   -->
+<arg name="server" default="windows" /> 
+
+<!-- =======================================   -->
+<!-- Call launch files that call their nodes   -->
+<!-- =======================================   -->
+	<include file="$(find mavros)/launch/node.launch">
+		<arg name="pluginlists_yaml" 	value="$(find mavros)/launch/px4_pluginlists.yaml" /> 
+		<arg name="config_yaml" 		value="$(find mavros)/launch/px4_config.yaml" /> 
+
+		<arg name="fcu_url" 		value="$(arg fcu_url)" /> 
+		<arg name="gcs_url" 		value="$(arg gcs_url)" /> 
+		<arg name="tgt_system"  	value="$(arg tgt_system)" /> 
+		<arg name="tgt_component" 	value="$(tgt_component)" /> 
+		<arg name="log_output"  	value="$(arg log_output)" /> 
+	</include>
+
+
+<!-- For VRPN   -->
+	<include file="$(find vrpn_client_ros)/launch/sample.launch"> 
+		<arg name="server" value="$(arg server)" /> 
+	</include>
+
+	<arg name="vrpn_topic" 		default="/vrpn_client_node/drone/pose" /> 
+	<arg name="mavros_topic" 	default="/mavros/vision_pose/pose" /> 
+
+<!-- Frame referential conversion   -->
+<!-- <include file="$(find swarm)/launch/frame_node.launch">  -->
+<include file="$(find waypoint_navigation)/launch/frame_node.launch"> 
+	<arg name="vrpn_topic" 		value="$(arg vrpn_topic)" /> 
+	<arg name="mavros_topic" 	value="$(arg mavros_topic)" /> 
+</include>
+
+<!-- OpenCV camera OR usb camera (see below) -->
+<include file="$(find waypoint_navigation)/launch/openmmv_node.launch">
+</include>
+<!-- USB camera -->
+<!-- 
+<include file="$(find waypoint_navigation)/launch/usb_cam_node.launch">
+</include>
+-->
+
+
+<!-- Apriltag-ROS -->
+<include file="$(find waypoint_navigation)/launch/APtag_ros.launch">
+</include>
+
+
+</launch>

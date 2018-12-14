@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+
+<arg name="vrpn_topic" 		default="/vrpn_client_node/drone/pose" />
+<arg name="mavros_topic" 	default="/mavros/vision_pose/pose"/>
+
+<node pkg="waypoint_navigation" name="frame_node" type="frame_node.py" output="screen" respawn="true"> 
+	<param name="vrpn_topic" 	value="$(arg vrpn_topic)"/> 
+	<param name="mavros_topic" 	value="$(arg mavros_topic)"/> 
+</node>
+
+</launch>

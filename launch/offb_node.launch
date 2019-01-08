@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+
+<node pkg="waypoint_navigation" name="offb_node" type="offb_node" output="screen" /> 
+
+</launch>

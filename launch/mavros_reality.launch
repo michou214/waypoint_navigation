@@ -7,7 +7,7 @@
 
 <arg name="fcu_url" 	  default="/dev/ttyUSB0:57600" /> 
 <!-- <arg name="pc_url"   default="udp://@mac-wlan" /> -->
-<arg name="gcs_url" 		  default="udp://@gcs" />
+<arg name="gcs_url" 	  default="udp://@gcs" />
 <arg name="tgt_system" 	  default="1" /> 
 <arg name="tgt_component" default="0" /> 
 <arg name="log_output" 	  default="screen" /> 
@@ -46,18 +46,8 @@
 	<arg name="mavros_topic" 	value="$(arg mavros_topic)" /> 
 </include>
 
-<!-- OpenCV camera OR usb camera (see below) -->
-<include file="$(find waypoint_navigation)/launch/openmmv_node.launch">
-</include>
-<!-- USB camera -->
-<!-- 
-<include file="$(find waypoint_navigation)/launch/usb_cam_node.launch">
-</include>
--->
-
-
-<!-- Apriltag-ROS -->
-<include file="$(find waypoint_navigation)/launch/APtag_ros.launch">
+<!-- Offb_node -->
+<include file="$(find waypoint_navigation)/launch/offb_node.launch">
 </include>
 
 
